@@ -25,16 +25,25 @@ function censor(censor) {
       return value;  
     }
   }
+channelName = "discord-os-session"
+if (process.env.dev=="true") {
+    channelName = "discord-os-dev-session"
+}
+channelCommand = "discordos!channel"
+if (process.env.dev=="true") {
+  channelCommand = "discordosdev!channel"
+}
 client.on("message", message => {
     if (message.author.bot) return;
     if (message.channel.type != "dm") {
     everyone = message.guild.roles.find(r => r.name == "@" + "everyone");
     }
-    if (message.channel.name != `discord-os-session-${message.author.id}` && message.channel.type != "dm") {
-      if(message.content != "discordos!channel" && message.mentions.users.first() && message.mentions.users.first().id == client.user.id) {
+
+    if (message.channel.name != `${channelName}-${message.author.id}` && message.channel.type != "dm") {
+      if(message.content != channelCommand && message.mentions.users.first() && message.mentions.users.first().id == client.user.id) {
         message.channel.send("You can start a session either by dm (That starts whenever you send a message) or by a server channel (To start this type of session send the command \`discordos!channel\` here)")
-      } else if (message.content == "discordos!channel") {
-        message.guild.createChannel(`discord-os-session-${message.author.id}`, "text").then(chnl => {
+      } else if (message.content == channelCommand) {
+        message.guild.createChannel(`${channelName}-${message.author.id}`, "text").then(chnl => {
           chnl.overwritePermissions(everyone, {VIEW_CHANNEL: false})
           chnl.overwritePermissions(message.author.id, {VIEW_CHANNEL: true})
           chnl.overwritePermissions(client.user.id, {VIEW_CHANNEL: true})
