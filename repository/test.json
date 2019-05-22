@@ -1,0 +1,7 @@
+{
+    "name":"test",
+    "files":[{
+        "path":"/test.js",
+        "installPath":"/bin/test"
+    }]
+}
