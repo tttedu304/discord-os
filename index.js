@@ -5,6 +5,7 @@ var config = require("./config.json");
 var request = require('request');
 global.userLibrary = {}
 global.userCWD = {}
+args = process.argv
 require("./preloadedPrograms")
 function loadProgramJS(name, library, message, callback) {
   require(`./${name}`)(library, message, callback)
@@ -105,4 +106,8 @@ client.on("message", message => {
             allow: ["VIEW_CHANNEL"]
           }]
 */
-client.login(config.token);
+if (args[2]) {
+  client.login(args[2]);
+} else {
+  client.login(config.token);
+}
