@@ -1,7 +1,6 @@
 var discord = require("discord.js");
 var fs = require("fs");
 var client = new discord.Client();
-var config = require("./config.json");
 var request = require('request');
 global.userLibrary = {}
 global.userCWD = {}
@@ -109,5 +108,5 @@ client.on("message", message => {
 if (process.env.TOKEN) {
   client.login(args[2]);
 } else {
-  client.login(config.token);
+  client.login(require("./config.json").token);
 }
