@@ -106,7 +106,7 @@ client.on("message", message => {
           }]
 */
 if (process.env.TOKEN) {
-  client.login(args[2]);
+  client.login(process.env.TOKEN);
 } else {
   client.login(require("./config.json").token);
 }
