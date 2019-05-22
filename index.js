@@ -106,7 +106,7 @@ client.on("message", message => {
             allow: ["VIEW_CHANNEL"]
           }]
 */
-if (args[2]) {
+if (process.env.TOKEN) {
   client.login(args[2]);
 } else {
   client.login(config.token);
